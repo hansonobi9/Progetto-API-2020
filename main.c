@@ -50,6 +50,27 @@ void print (int ind1, int ind2) {
             printf("%s",text[i]);
 }
 
+void delete (int ind1, int ind2) {
+    int shift = 0;
+
+    for (int i = ind1; i <= ind2; i++) {
+        if (i > 0 && i <= t_dim) {
+            free(text[i]);
+            shift++;
+        }
+    }
+
+    if (t_dim > ind2) {
+        for (int i = ind2+1; i <= t_dim; i++) {
+            text[i-shift] = malloc((strlen(text[i])+1)*sizeof(char));
+            strcpy(text[i-shift],text[i]);
+            free(text[i]);
+        }
+    }
+    text = realloc(text,(t_dim-shift+1)*sizeof(char*));
+    t_dim = t_dim-shift;
+}
+
 int main(int argc, char *argv[]) {
     int ind1,ind2;
 
@@ -64,8 +85,9 @@ int main(int argc, char *argv[]) {
         //ind2 = atoi(&a[2]);
         if (strcmp(&a[strlen(a)-1],"c") == 0)
             change(ind1,ind2);
-        else
-            print(ind1,ind2);
+        else if(strcmp(&a[strlen(a)-1],"d") == 0)
+            delete(ind1,ind2);
+        else print(ind1,ind2);
         gets(a);
     }
 
