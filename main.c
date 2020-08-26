@@ -13,7 +13,6 @@ typedef struct stack_s {
     int i2;
     int old_dim; //old(t_dim)
     char **data; //array of strings
-    int data_dim;  //length of data
     char opr; // operation type
     struct stack_s *next;
 }stack_t;
@@ -36,7 +35,6 @@ stack_t* createU (int i1, int i2, int old_dim, char opr) { //create a new elemen
     n->old_dim = old_dim;
     n->opr = opr;
     n->data = NULL;
-    n->data_dim = 0;
     n->next = NULL;
     return n;
 }
@@ -65,7 +63,7 @@ stack_t* resetU(stack_t *h) { //delete all elements of the stack
     while (tmp != NULL) {
         tbd = tmp;
         tmp = tmp->next;
-        free(tbd->data);
+        //free(tbd->data);
         free(tbd);
     }
 
@@ -87,14 +85,10 @@ void change (int ind1, int ind2) {
     int m = min(ind2,t_dim);
     stack_t *el = createU(ind1,ind2,t_dim,'c');
 
-    if (t_dim == 0 || ind1 == t_dim+1)
-        el->data_dim = 0;
-    else {
+    if (!(t_dim == 0 || ind1 == t_dim+1)) {
         el->data = malloc(sizeof(char*)*(m-ind1+1));
-        for (int i = ind1, c = 0; i <=m; i++,c++) {
+        for (int i = ind1, c = 0; i <=m; i++,c++)
             el->data[c] = text[i];
-            el->data_dim++;
-        }
     }
     u = pushU(u,el);
 
@@ -140,10 +134,8 @@ void delete (int ind1, int ind2) {
     stack_t *el = createU(ind1,ind2,t_dim,'d');
     el->data = malloc(sizeof(char*)*t_dim);
 
-    for (int i = 1,c = 0; i <= t_dim; i++,c++) {
+    for (int i = 1,c = 0; i <= t_dim; i++,c++)
         el->data[c] = text[i];
-        el->data_dim++;
-    }
 
     for (int i = ind1; i <= ind2; i++) {
         if (i > 0 && i <= t_dim) {
@@ -167,10 +159,9 @@ void uchange (stack_t *el) {
     stack_t *rel = createU(el->i1,el->i2,t_dim,'c');
     rel->data = malloc(sizeof(char*)*(rel->i2-rel->i1+1));
 
-    for (int i = rel->i1,c = 0; i <= rel->i2; i++,c++) {
+    for (int i = rel->i1,c = 0; i <= rel->i2; i++,c++)
         rel->data[c] = text[i];
-        rel->data_dim++;
-    }
+
     r = pushU(r,rel);
 
     if (el->i1 > el->old_dim) {
@@ -203,10 +194,8 @@ void rdelete(stack_t *rel) {
     stack_t *el = createU(rel->i1,rel->i2,t_dim,'d');
     el->data = malloc(sizeof(char*)*t_dim);
 
-    for (int i = 1,c = 0; i <= t_dim; i++,c++) {
+    for (int i = 1,c = 0; i <= t_dim; i++,c++)
         el->data[c] = text[i];
-        el->data_dim++;
-    }
 
     for (int i = rel->i1; i <= rel->i2; i++) {
         if (i > 0 && i <= t_dim) {
@@ -227,14 +216,10 @@ void rdelete(stack_t *rel) {
 void rchange(stack_t *rel) {
     int m = min(rel->i2,t_dim);
     stack_t *el = createU(rel->i1,rel->i2,t_dim,'c');
-    if (t_dim == 0 || rel->i1 == t_dim+1)
-        el->data_dim = 0;
-    else {
+    if (!(t_dim == 0 || rel->i1 == t_dim+1)) {
         el->data = malloc(sizeof(char*)*(m-rel->i1+1));
-        for (int i = rel->i1, c = 0; i <=m; i++,c++) {
+        for (int i = rel->i1, c = 0; i <=m; i++,c++)
             el->data[c] = text[i];
-            el->data_dim++;
-        }
     }
     u = pushU(u,el);
 
