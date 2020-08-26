@@ -278,7 +278,7 @@ int main(int argc, char *argv[]) {
         opr = a[strlen(a)-1];
         switch (opr) {
             case 'c':
-                sscanf(a, "%d,%dx", &ind1, &ind2);
+                sscanf(a, "%d,%d", &ind1, &ind2);
                 if (w > 0) {
                     undo(w);
                     e = e - w;
@@ -294,7 +294,7 @@ int main(int argc, char *argv[]) {
                 e++;
                 break;
             case 'p':
-                sscanf(a, "%d,%dx", &ind1, &ind2);
+                sscanf(a, "%d,%d", &ind1, &ind2);
                 if (w > 0) {
                     undo(w);
                     e = e - w;
@@ -309,7 +309,7 @@ int main(int argc, char *argv[]) {
                 print(ind1, ind2);
                 break;
             case 'd':
-                sscanf(a, "%d,%dx", &ind1, &ind2);
+                sscanf(a, "%d,%d", &ind1, &ind2);
                 if (w > 0) {
                     undo(w);
                     e = e - w;
@@ -325,14 +325,14 @@ int main(int argc, char *argv[]) {
                 e++;
                 break;
             case 'u':
-                sscanf(a, "%dx", &ind1);
+                sscanf(a, "%d", &ind1);
                 if (w+ind1 > e)
                     w = e;
                 else
                     w = w + ind1;
                 break;
             case 'r':
-                sscanf(a, "%dx", &ind1);
+                sscanf(a, "%d", &ind1);
                 if (w-ind1 < q)
                     w = q;
                 else
