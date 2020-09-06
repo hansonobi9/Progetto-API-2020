@@ -63,7 +63,7 @@ stack_t* resetU(stack_t *h) { //delete all elements of the stack
     while (tmp != NULL) {
         tbd = tmp;
         tmp = tmp->next;
-        //free(tbd->data);
+        free(tbd->data);
         free(tbd);
     }
 
