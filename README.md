@@ -8,3 +8,17 @@ __Tema:__ Un editor di testi con undo e redo, con i seguenti comandi:
 * n**r**: fa il redo degli ultimi n comandi annullati con undo
 * **q**: termina
 
+
+
+
+# Final Exam of Algorithms and Data Structures - a.a. 2019-2020
+__Theme:__ A text editor with undo and redo, with the following commands:
+* ind<sub>1</sub>, ind<sub>2</sub>**c**: change the text to the lines between ind<sub>1</sub> and ind<sub>2</sub>, there will be ind<sub>2</sub>-ind<sub>1</sub>+1 lines plus a line with a single dot
+* ind<sub>1</sub>, ind<sub>2</sub>**d**: deletes the lines between ind<sub>1</sub> and ind<sub>2</sub> (extremes included)
+* ind<sub>1</sub>, ind<sub>2</sub>**p**: print the lines between ind<sub>1</sub> and ind<sub>2</sub>
+* n**u**: undo the last n commands (c or d)
+* n**r**: redo the last n commands undone with undo
+* **q**: ends
+
+
+
